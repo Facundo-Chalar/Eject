@@ -7,16 +7,17 @@
 package eject.design;
 
 
+import eject.domain.ConfigurationManager;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import eject.domain.ConfigurationManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
@@ -65,12 +66,22 @@ public void ejectStream(boolean xEstaListo){
              System.out.println(line);
             if(line.contains("Available streams:")){
                 line=line.replace("Available streams:","");
-            }if(line.contains("(worst)") || line.contains("(best)")){
+            }if(line.contains("(worst)") || line.contains("(best)") || line.contains("(worst, best)")){
+                line=line.replace("(worst, best)", "");
                 line=line.replace("(worst)", "");
                 line=line.replace("(best)", "");
+               
+               
               }  
-            String[] resoluciones=line.split(",");
-                for(int i=0;i<resoluciones.length-1;i++){
+            String[] resoluciones;
+            if(line.equals("source")){
+                resoluciones=new String[1];
+                resoluciones[0]=line;
+            }else{
+                resoluciones=line.split(",");
+            }
+           
+                for(int i=0;i<resoluciones.length;i++){
                     ComboBoxModel comboResoluciones=new DefaultComboBoxModel(resoluciones);
                     jComboBox1.setModel(comboResoluciones);
                     
@@ -102,6 +113,7 @@ public void ejectStream(boolean xEstaListo){
         jButton1 = new javax.swing.JButton();
         btnEject = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -196,7 +208,8 @@ public void ejectStream(boolean xEstaListo){
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -210,6 +223,8 @@ public void ejectStream(boolean xEstaListo){
                         .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEject, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -231,7 +246,9 @@ public void ejectStream(boolean xEstaListo){
             JOptionPane.showMessageDialog(null, "Search for the stream and pick quality first.");
         }
              else {
+          
         ejectStream(true);
+            
         }
     }//GEN-LAST:event_btnEjectActionPerformed
 
@@ -322,6 +339,7 @@ public void ejectStream(boolean xEstaListo){
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
