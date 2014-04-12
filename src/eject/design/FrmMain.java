@@ -45,11 +45,11 @@ public void ejectStream(boolean xEstaListo){
          String rutaLs=ConfigurationManager.getConfigSettings("rutaLs");
          if(xEstaListo){
             
-          ejectBuilder=new ProcessBuilder("cmd.exe","/C",rutaLs+ " twitch.tv/"+jTextField1.getText()+" "+jComboBox1.getModel().getSelectedItem().toString()); 
+          ejectBuilder=new ProcessBuilder("cmd.exe","/C",rutaLs+ " twitch.tv/"+txtStream.getText()+" "+cbQuality.getModel().getSelectedItem().toString()); 
          }else{
              
            
-               ejectBuilder=new ProcessBuilder("cmd.exe","/C", rutaLs+" twitch.tv/"+ jTextField1.getText());
+               ejectBuilder=new ProcessBuilder("cmd.exe","/C", rutaLs+" twitch.tv/"+ txtStream.getText());
             
          }
         ejectBuilder.redirectErrorStream(true);
@@ -83,7 +83,7 @@ public void ejectStream(boolean xEstaListo){
            
                 for(int i=0;i<resoluciones.length;i++){
                     ComboBoxModel comboResoluciones=new DefaultComboBoxModel(resoluciones);
-                    jComboBox1.setModel(comboResoluciones);
+                    cbQuality.setModel(comboResoluciones);
                     
                 }
                 if(line.contains("livestreamer: error")|| line.contains("error: Unable to open URL") || line.contains("No streams found")){
@@ -108,16 +108,16 @@ public void ejectStream(boolean xEstaListo){
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
+        txtStream = new javax.swing.JTextField();
+        cbQuality = new javax.swing.JComboBox();
+        btnSearch = new javax.swing.JButton();
         btnEject = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        lblTwitch = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
+        mbMenu = new javax.swing.JMenuBar();
+        menuConfig = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        menuOther = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
@@ -128,19 +128,19 @@ public void ejectStream(boolean xEstaListo){
         setBackground(new java.awt.Color(255, 255, 255));
         setIconImage(Toolkit.getDefaultToolkit().getImage(FrmMain.class.getResource("eject.png")));
 
-        jComboBox1.setBackground(new java.awt.Color(0, 0, 0));
-        jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Enter a stream to pick quality" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cbQuality.setBackground(new java.awt.Color(0, 0, 0));
+        cbQuality.setForeground(new java.awt.Color(255, 255, 255));
+        cbQuality.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Enter a stream to pick quality" }));
+        cbQuality.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cbQualityActionPerformed(evt);
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eject/design/search.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eject/design/search.png"))); // NOI18N
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
 
@@ -155,11 +155,11 @@ public void ejectStream(boolean xEstaListo){
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(100, 65, 165));
-        jLabel2.setText(" Twitch.tv/");
+        lblTwitch.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblTwitch.setForeground(new java.awt.Color(100, 65, 165));
+        lblTwitch.setText(" Twitch.tv/");
 
-        jMenu2.setText("Config");
+        menuConfig.setText("Config");
 
         jMenuItem1.setText("Path to livestreamer app.");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -167,11 +167,11 @@ public void ejectStream(boolean xEstaListo){
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        menuConfig.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu2);
+        mbMenu.add(menuConfig);
 
-        jMenu3.setText("Other");
+        menuOther.setText("Other");
 
         jMenuItem3.setText("Show console");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -179,7 +179,7 @@ public void ejectStream(boolean xEstaListo){
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem3);
+        menuOther.add(jMenuItem3);
 
         jMenuItem2.setText("About");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -187,11 +187,11 @@ public void ejectStream(boolean xEstaListo){
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem2);
+        menuOther.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu3);
+        mbMenu.add(menuOther);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(mbMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -202,13 +202,13 @@ public void ejectStream(boolean xEstaListo){
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(lblTwitch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                        .addComponent(txtStream, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbQuality, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -216,11 +216,11 @@ public void ejectStream(boolean xEstaListo){
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)))
+                        .addComponent(txtStream, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbQuality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTwitch)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEject, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -231,18 +231,18 @@ public void ejectStream(boolean xEstaListo){
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(jTextField1.getText().equals("")){
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        if(txtStream.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Please enter the stream name.");
         }else {
         ejectStream(false);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnEjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjectActionPerformed
-             if(jTextField1.getText().equals("")){
+             if(txtStream.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Please enter stream");
-        }else if(jComboBox1.getSelectedItem().toString().equals("Enter a stream to pick quality")){
+        }else if(cbQuality.getSelectedItem().toString().equals("Enter a stream to pick quality")){
             JOptionPane.showMessageDialog(null, "Search for the stream and pick quality first.");
         }
              else {
@@ -252,9 +252,9 @@ public void ejectStream(boolean xEstaListo){
         }
     }//GEN-LAST:event_btnEjectActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cbQualityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbQualityActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cbQualityActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         JFileChooser fcRutaLs=new JFileChooser();
@@ -329,17 +329,17 @@ public void ejectStream(boolean xEstaListo){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEject;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JComboBox cbQuality;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblTwitch;
+    private javax.swing.JMenuBar mbMenu;
+    private javax.swing.JMenu menuConfig;
+    private javax.swing.JMenu menuOther;
+    private javax.swing.JTextField txtStream;
     // End of variables declaration//GEN-END:variables
 }
