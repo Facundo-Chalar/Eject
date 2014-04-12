@@ -12,8 +12,7 @@ import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
@@ -24,7 +23,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Tower
  */
 public class FrmMain extends javax.swing.JFrame {
-    private frmConsole frmConsola;
+    private final frmConsole frmConsola;
     /**
      * Creates new form FrmMain
      */
@@ -81,11 +80,10 @@ public void ejectStream(boolean xEstaListo){
                 resoluciones=line.split(",");
             }
            
-                for(int i=0;i<resoluciones.length;i++){
-                    ComboBoxModel comboResoluciones=new DefaultComboBoxModel(resoluciones);
-                    cbQuality.setModel(comboResoluciones);
-                    
-                }
+             for (String resolucion : resoluciones) {
+                 ComboBoxModel comboResoluciones=new DefaultComboBoxModel(resoluciones);
+                 cbQuality.setModel(comboResoluciones);
+             }
                 if(line.contains("livestreamer: error")|| line.contains("error: Unable to open URL") || line.contains("No streams found")){
                     JOptionPane.showMessageDialog(null, "Stream not found,check name.");
                 }else if(line.contains("null")){
@@ -113,7 +111,6 @@ public void ejectStream(boolean xEstaListo){
         btnSearch = new javax.swing.JButton();
         btnEject = new javax.swing.JButton();
         lblTwitch = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
         mbMenu = new javax.swing.JMenuBar();
         menuConfig = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -208,8 +205,7 @@ public void ejectStream(boolean xEstaListo){
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbQuality, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cbQuality, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -223,8 +219,6 @@ public void ejectStream(boolean xEstaListo){
                         .addComponent(lblTwitch)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEject, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -308,19 +302,14 @@ public void ejectStream(boolean xEstaListo){
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FrmMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new FrmMain().setVisible(true);
             }
@@ -335,7 +324,6 @@ public void ejectStream(boolean xEstaListo){
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel lblTwitch;
     private javax.swing.JMenuBar mbMenu;
     private javax.swing.JMenu menuConfig;

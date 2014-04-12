@@ -97,7 +97,6 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cbQuality" min="-2" pref="221" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jProgressBar1" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -116,8 +115,6 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnEject" min="-2" pref="53" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jProgressBar1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -182,8 +179,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value=" Twitch.tv/"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JProgressBar" name="jProgressBar1">
     </Component>
   </SubComponents>
 </Form>
