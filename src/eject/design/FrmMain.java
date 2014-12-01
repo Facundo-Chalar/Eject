@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 /***
  *
- * @author Tower
+ * @author Facu
  */
 public class FrmMain extends javax.swing.JFrame {
     private final frmConsole frmConsola;
